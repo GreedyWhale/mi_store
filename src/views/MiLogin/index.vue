@@ -2,7 +2,7 @@
   <div class="wrap">
     <header class="header">
       <img src="../../assets/image/milogo@2x.png" alt="logo" />
-      <h1>{{ languageConversion(currentLanguage, 'title') }}</h1>
+      <h1>{{ languageConversion(currentLanguage, "title") }}</h1>
     </header>
     <div class="input-area">
       <CustomInput
@@ -24,25 +24,27 @@
       </CustomInput>
       <CustomInput
         :placeholder="loginConfig.passwordPlaceholder"
-        :type="isVisiblePassword ? 'text': loginConfig.passwordInputType"
+        :type="isVisiblePassword ? 'text' : loginConfig.passwordInputType"
         @focus="hideErrMsg"
         v-model="password"
       >
-        <div
-          slot="suffix"
-          class="input-suffix"
-        >
+        <div slot="suffix" class="input-suffix">
           <template v-if="isSmSLogin">
             <p
               :class="[getCodeLock ? 'disable' : '', 'input-suffix__text']"
-              @click="getVerificationCode">
-              {{ languageConversion(currentLanguage, 'codeMsg') }}
+              @click="getVerificationCode"
+            >
+              {{ languageConversion(currentLanguage, "codeMsg") }}
             </p>
           </template>
           <template v-else>
             <div
-              :class="['input-suffix__btn', isVisiblePassword ? 'input-suffix__btn-active' : '']"
-              @click="toggelPasswordInputType">
+              :class="[
+                'input-suffix__btn',
+                isVisiblePassword ? 'input-suffix__btn-active' : ''
+              ]"
+              @click="toggelPasswordInputType"
+            >
               <svg class="icon-font" aria-hidden="true">
                 <use xlink:href="#icon-visible"></use>
               </svg>
@@ -61,22 +63,27 @@
       <button @click="login">{{ loginConfig.loginBtn }}</button>
       <button @click="toggleLoginType">{{ loginConfig.toggleBtn }}</button>
       <div class="account-service" v-if="!isSmSLogin">
-        <a href="https://cn.account.xiaomi.com/pass/register?callback=https%3A%2F%2Fm.mi.com%2Fv1%2Fauthorize%2Fsso_callback%3Ffollowup%3Dhttps%253A%252F%252Fm.mi.com%252Fuser%26sign%3DZWJiMDc5YWVjOTNkNGE5YzM4Mjc2Y2I1MGYxMmE0YmY4MmRkMDY1Ng%2C%2C&sid=mi_eshopm_go&_bal=true&_loginSign=ticket&_loginType=ticket&_locale=zh_CN">
-          {{ languageConversion(currentLanguage, 'registerTip') }}
+        <a
+          href="https://cn.account.xiaomi.com/pass/register?callback=https%3A%2F%2Fm.mi.com%2Fv1%2Fauthorize%2Fsso_callback%3Ffollowup%3Dhttps%253A%252F%252Fm.mi.com%252Fuser%26sign%3DZWJiMDc5YWVjOTNkNGE5YzM4Mjc2Y2I1MGYxMmE0YmY4MmRkMDY1Ng%2C%2C&sid=mi_eshopm_go&_bal=true&_loginSign=ticket&_loginType=ticket&_locale=zh_CN"
+        >
+          {{ languageConversion(currentLanguage, "registerTip") }}
         </a>
         <span>|</span>
-        <a href="https://account.xiaomi.com/pass/forgetPassword?callback=https%3A%2F%2Fm.mi.com%2Fv1%2Fauthorize%2Fsso_callback%3Ffollowup%3Dhttps%253A%252F%252Fm.mi.com%252Fuser%26sign%3DZWJiMDc5YWVjOTNkNGE5YzM4Mjc2Y2I1MGYxMmE0YmY4MmRkMDY1Ng%2C%2C&sid=mi_eshopm_go&_bal=true&_loginSign=ticket&_loginType=ticket&_locale=zh_CN">
-          {{ languageConversion(currentLanguage, 'forgotPassword') }}
+        <a
+          href="https://account.xiaomi.com/pass/forgetPassword?callback=https%3A%2F%2Fm.mi.com%2Fv1%2Fauthorize%2Fsso_callback%3Ffollowup%3Dhttps%253A%252F%252Fm.mi.com%252Fuser%26sign%3DZWJiMDc5YWVjOTNkNGE5YzM4Mjc2Y2I1MGYxMmE0YmY4MmRkMDY1Ng%2C%2C&sid=mi_eshopm_go&_bal=true&_loginSign=ticket&_loginType=ticket&_locale=zh_CN"
+        >
+          {{ languageConversion(currentLanguage, "forgotPassword") }}
         </a>
       </div>
     </div>
     <div class="other-login__type">
-      <h5>{{ languageConversion(currentLanguage, 'otherLoginType') }}</h5>
+      <h5>{{ languageConversion(currentLanguage, "otherLoginType") }}</h5>
       <ul>
         <li>
           <a
             href="https://api.weibo.com/oauth2/authorize?response_type=code&client_id=2996826273&redirect_uri=https://account.xiaomi.com/pass/sns/login/load&state=7b22736964223a226d695f6573686f706d5f676f222c227469636b6574223a22343631303234222c226c6f63616c65223a227a685f434e222c2263616c6c6261636b223a2268747470732533412532462532466d2e6d692e636f6d2532467631253246617574686f72697a6525324673736f5f63616c6c6261636b253346666f6c6c6f77757025334468747470732532353341253235324625323532466d2e6d692e636f6d2532353246757365722532367369676e2533445a574a694d4463355957566a4f544e6b4e474535597a4d344d6a6332593249314d4759784d6d4530596d59344d6d526b4d4459314e67253243253243222c226170706964223a2232393936383236323733227d"
-            target="_blank">
+            target="_blank"
+          >
             <svg class="icon-font" aria-hidden="true">
               <use xlink:href="#icon-weibo"></use>
             </svg>
@@ -85,7 +92,8 @@
         <li>
           <a
             href="https://auth.alipay.com/login/express.htm?goto=https%3A%2F%2Fmemberexprod.alipay.com%3A443%2Fauthorize%2FuserAuthQuickLoginAction.htm%3Fe_i_i_d%3D9aa20c0f49221216fd5d41bf31b2c1a4"
-            target="_blank">
+            target="_blank"
+          >
             <svg class="icon-font" aria-hidden="true">
               <use xlink:href="#icon-zhifubao"></use>
             </svg>
@@ -94,7 +102,8 @@
         <li>
           <a
             href="https://open.weixin.qq.com/sns/explorer_broker?appid=wx62ba64796e13f092&redirect_uri=https%3A%2F%2Faccount.xiaomi.com%2Fpass%2Fsns%2Flogin%2Fload&response_type=code&scope=snsapi_userinfo&state=WEIXIN992251#wechat_redirect"
-            target="_blank">
+            target="_blank"
+          >
             <svg class="icon-font" aria-hidden="true">
               <use xlink:href="#icon-weixin"></use>
             </svg>
@@ -109,18 +118,18 @@
           :key="nav.text"
           @click="toggelFooterNav(index)"
         >
-          <p :class="[(index === footerNavActiveIndex) ? 'active' : '']">{{
-            nav.text
-          }}</p>
+          <p :class="[index === footerNavActiveIndex ? 'active' : '']">
+            {{ nav.text }}
+          </p>
         </li>
         <li>
           <a :href="footNav[footerNavActiveIndex].FAQUrl" target="_blank">
-            {{ languageConversion(currentLanguage, 'FAQ') }}
+            {{ languageConversion(currentLanguage, "FAQ") }}
           </a>
         </li>
         <li>
           <a :href="footNav[footerNavActiveIndex].privacyUrl" target="_blank">
-            {{ languageConversion(currentLanguage, 'privacyPolicy') }}
+            {{ languageConversion(currentLanguage, "privacyPolicy") }}
           </a>
         </li>
       </ul>
@@ -132,9 +141,9 @@
 import { Component, Vue } from "vue-property-decorator";
 import CustomInput from "@/components/CustomInput.vue";
 import md5 from "blueimp-md5";
-import { CHANGE_LOGININ_STATUS } from '@/constant';
-import { Mutation, State } from 'vuex-class';
-import pageContent from './page_content';
+import { CHANGE_LOGININ_STATUS } from "@/constant";
+import { Mutation, State } from "vuex-class";
+import pageContent from "./page_content";
 
 @Component({
   components: {
@@ -148,21 +157,21 @@ export default class MiLogin extends Vue {
   footNav: any[] = [
     {
       text: "简体",
-      language: 'zh_CN',
-      privacyUrl: 'https://www.mi.com/about/privacy/',
-      FAQUrl: 'https://static.account.xiaomi.com/html/faq/zh_CN/faqList.html'
+      language: "zh_CN",
+      privacyUrl: "https://www.mi.com/about/privacy/",
+      FAQUrl: "https://static.account.xiaomi.com/html/faq/zh_CN/faqList.html"
     },
     {
       text: "繁体",
-      language: 'zh_TW',
-      privacyUrl: 'https://www.mi.com/tw/about/privacy/',
-      FAQUrl: 'https://static.account.xiaomi.com/html/faq/zh_TW/faqList.html'
+      language: "zh_TW",
+      privacyUrl: "https://www.mi.com/tw/about/privacy/",
+      FAQUrl: "https://static.account.xiaomi.com/html/faq/zh_TW/faqList.html"
     },
     {
       text: "English",
-      language: 'en_US',
-      privacyUrl: 'https://www.mi.com/global/about/privacy/',
-      FAQUrl: 'https://static.account.xiaomi.com/html/faq/en_US/faqList.html'
+      language: "en_US",
+      privacyUrl: "https://www.mi.com/global/about/privacy/",
+      FAQUrl: "https://static.account.xiaomi.com/html/faq/en_US/faqList.html"
     }
   ];
   footerNavActiveIndex: number = 0;
@@ -175,18 +184,18 @@ export default class MiLogin extends Vue {
   verificationCode: any = null;
   errMsg: string = "";
   isVisiblePassword: boolean = false;
-  
+
   // mutations
   @Mutation(CHANGE_LOGININ_STATUS) changeLoginStatus!: () => void;
 
   // methods
   toggelFooterNav(index: number): void {
-    this.errMsg = '';
+    this.errMsg = "";
     this.footerNavActiveIndex = index;
   }
   toggleLoginType(): void {
     this.password = null;
-    this.errMsg = '';
+    this.errMsg = "";
     this.isSmSLogin = !this.isSmSLogin;
   }
   toggelPasswordInputType(): void {
@@ -194,12 +203,18 @@ export default class MiLogin extends Vue {
   }
   countdown(time: number): void {
     if (!time) {
-      this.codeMsg = this.languageConversion(this.currentLanguage, 'codeMsgRetry');
+      this.codeMsg = this.languageConversion(
+        this.currentLanguage,
+        "codeMsgRetry"
+      );
       this.getCodeLock = false;
       return;
     }
     time--;
-    this.codeMsg = `${this.languageConversion(this.currentLanguage, 'codeMsgRetry')}(${time})`;
+    this.codeMsg = `${this.languageConversion(
+      this.currentLanguage,
+      "codeMsgRetry"
+    )}(${time})`;
     this.countdownTimer = setTimeout(() => {
       this.countdown(time);
     }, 1000);
@@ -216,34 +231,52 @@ export default class MiLogin extends Vue {
     return phoneReg.test(this.account);
   }
   checkVerificationCode(): boolean {
-    if(!this.password) {
-      this.errMsg = this.languageConversion(this.currentLanguage, 'errMsgEmptyVerificationCode')
+    if (!this.password) {
+      this.errMsg = this.languageConversion(
+        this.currentLanguage,
+        "errMsgEmptyVerificationCode"
+      );
       return false;
     }
-    if(this.verificationCode !== parseInt(this.password)) {
-      this.errMsg = this.languageConversion(this.currentLanguage, 'errMsgInvalidVerificationCode')
+    if (this.verificationCode !== parseInt(this.password)) {
+      this.errMsg = this.languageConversion(
+        this.currentLanguage,
+        "errMsgInvalidVerificationCode"
+      );
       return false;
     }
     return true;
   }
   checkPhoneNumber(): boolean {
     if (!this.account) {
-      this.errMsg = this.languageConversion(this.currentLanguage, 'errMsgEmptyPhoneNumber');
+      this.errMsg = this.languageConversion(
+        this.currentLanguage,
+        "errMsgEmptyPhoneNumber"
+      );
       return false;
     }
     if (!this.verifyPhoneNumber()) {
-      this.errMsg = this.languageConversion(this.currentLanguage, 'errMsgInvalidPhoneNumber');
+      this.errMsg = this.languageConversion(
+        this.currentLanguage,
+        "errMsgInvalidPhoneNumber"
+      );
       return false;
     }
     return true;
   }
   checkAccount(): boolean {
-    if(!this.account) {
-      this.errMsg = this.languageConversion(this.currentLanguage, 'errMsgEmptyAccount');
+    if (!this.account) {
+      this.errMsg = this.languageConversion(
+        this.currentLanguage,
+        "errMsgEmptyAccount"
+      );
       return false;
     }
-    if(!this.password) {
-      this.errMsg = this.languageConversion(this.currentLanguage, 'errMsgEmptyPassword');
+    if (!this.password) {
+      this.errMsg = this.languageConversion(
+        this.currentLanguage,
+        "errMsgEmptyPassword"
+      );
       return false;
     }
     return true;
@@ -251,45 +284,58 @@ export default class MiLogin extends Vue {
   getVerificationCode(): void {
     if (!this.getCodeLock && this.checkPhoneNumber()) {
       this.getCodeLock = true;
-      this.$ajax.post("api/getCode", {
-        phone: this.account
-      }).then(res => {
-        const { data: { result: { code } } } = res
-        this.verificationCode = code
-      });
-      this.startCountdown()
+      this.$ajax
+        .post("api/getCode", {
+          phone: this.account
+        })
+        .then(res => {
+          const {
+            data: {
+              result: { code }
+            }
+          } = res;
+          this.verificationCode = code;
+        });
+      this.startCountdown();
     }
   }
   hideErrMsg(event: Object): void {
     this.errMsg = "";
   }
   canLogin(): boolean {
-    if(this.isSmSLogin && this.checkPhoneNumber() && this.checkVerificationCode()) {
+    if (
+      this.isSmSLogin &&
+      this.checkPhoneNumber() &&
+      this.checkVerificationCode()
+    ) {
       return true;
     }
-    if(!this.isSmSLogin && this.checkAccount()) {
-       return true;
+    if (!this.isSmSLogin && this.checkAccount()) {
+      return true;
     }
     return false;
   }
   login(): void {
-    if(this.canLogin()) {
-      this.$ajax.post('api/login', {
-        account: this.account,
-        password: md5(this.password)
-      })
+    if (this.canLogin()) {
+      this.$ajax
+        .post("api/login", {
+          account: this.account,
+          password: md5(this.password)
+        })
         .then(() => {
           // todo 跳转
-          this.changeLoginStatus()
+          this.changeLoginStatus();
         })
-        .catch((error) => {
-          const { data: { msg } } = error;
+        .catch(error => {
+          const {
+            data: { msg }
+          } = error;
           this.errMsg = msg;
-        })
+        });
     }
   }
   languageConversion(languageType: string, textKey: string): string {
-    console.log(textKey)
+    console.log(textKey);
     return this.pageText[languageType][textKey];
   }
   // computed
@@ -297,20 +343,35 @@ export default class MiLogin extends Vue {
     let loginConfigObj: Object = {};
     if (this.isSmSLogin) {
       loginConfigObj = {
-        loginBtn: this.languageConversion(this.currentLanguage, 'loginBtnSMS'),
-        toggleBtn: this.languageConversion(this.currentLanguage, 'toggleBtnSMS'),
-        accountPlaceholder: this.languageConversion(this.currentLanguage, 'accountPlaceholderSMS'),
+        loginBtn: this.languageConversion(this.currentLanguage, "loginBtnSMS"),
+        toggleBtn: this.languageConversion(
+          this.currentLanguage,
+          "toggleBtnSMS"
+        ),
+        accountPlaceholder: this.languageConversion(
+          this.currentLanguage,
+          "accountPlaceholderSMS"
+        ),
         accountInputType: "tel",
-        passwordPlaceholder: this.languageConversion(this.currentLanguage, 'passwordPlaceholderSMS'),
+        passwordPlaceholder: this.languageConversion(
+          this.currentLanguage,
+          "passwordPlaceholderSMS"
+        ),
         passwordInputType: "number"
       };
     } else {
       loginConfigObj = {
-        loginBtn: this.languageConversion(this.currentLanguage, 'loginBtn'),
-        toggleBtn: this.languageConversion(this.currentLanguage, 'toggleBtn'),
-        accountPlaceholder: this.languageConversion(this.currentLanguage, 'accountPlaceholder'),
+        loginBtn: this.languageConversion(this.currentLanguage, "loginBtn"),
+        toggleBtn: this.languageConversion(this.currentLanguage, "toggleBtn"),
+        accountPlaceholder: this.languageConversion(
+          this.currentLanguage,
+          "accountPlaceholder"
+        ),
         accountInputType: "text",
-        passwordPlaceholder: this.languageConversion(this.currentLanguage, 'passwordPlaceholder'),
+        passwordPlaceholder: this.languageConversion(
+          this.currentLanguage,
+          "passwordPlaceholder"
+        ),
         passwordInputType: "password"
       };
     }
@@ -426,7 +487,7 @@ $login-type-bg: ($red-ed, $blue-6b, $green-00);
       > span {
         color: $black;
       }
-  }
+    }
   }
   .other-login__type {
     font-size: 24px;

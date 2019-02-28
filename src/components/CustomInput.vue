@@ -30,7 +30,11 @@ export default class CustomInput extends Vue {
   @Prop({ default: "nope" })
   private autocomplete!: string;
 
-  @Model("input", { type: [String, Number] }) value: string | number | null | undefined;
+  @Model("input", { type: [String, Number] }) value:
+    | string
+    | number
+    | null
+    | undefined;
 }
 </script>
 

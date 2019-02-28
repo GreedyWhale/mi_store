@@ -13,10 +13,10 @@ const Axios = axios.create({
 
 Axios.interceptors.response.use(
   response => {
-    if(response.data.stat !== 1) {
-      return Promise.reject(response)
+    if (response.data.stat !== 1) {
+      return Promise.reject(response);
     }
-    return response
+    return response;
   },
   error => {
     const config = error.config;

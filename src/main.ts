@@ -6,7 +6,9 @@ import "normalize.css";
 import "./assets/font/index.css";
 import "./assets/font/index";
 import "./assets/scss/reset.scss";
+import Axios from "./utils/request/";
 
+Vue.use(Axios);
 Vue.config.productionTip = false;
 
 new Vue({

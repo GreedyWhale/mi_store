@@ -1,13 +1,23 @@
 <template>
   <div class="input-wrap">
     <slot name="prefix" />
-    <input :type="type" :placeholder="placeholder" class="custom-input" />
+    <input
+      :type="type"
+      :placeholder="placeholder"
+      :autocomplete="autocomplete"
+      @input="$emit('input', $event.target.value)"
+      @change="$emit('change', $event.target.value)"
+      @blur="$emit('blur', $event.target.value)"
+      @focus="$emit('focus', $event)"
+      :value="value"
+      class="custom-input"
+    />
     <slot name="suffix" />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Model } from "vue-property-decorator";
 @Component({
   name: "CustomInput"
 })
@@ -16,6 +26,11 @@ export default class CustomInput extends Vue {
   private type!: string;
   @Prop()
   private placeholder!: string;
+  // 原因查看：https://developer.mozilla.org/zh-CN/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
+  @Prop({ default: "nope" })
+  private autocomplete!: string;
+
+  @Model("input", { type: [String, Number] }) value: string | number | null | undefined;
 }
 </script>
 

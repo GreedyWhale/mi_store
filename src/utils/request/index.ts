@@ -1,4 +1,6 @@
 import axios from "axios";
+import eventBus from "@/eventBus";
+import { GLOBAL_EVENT_LOADING } from "@/constant";
 
 const Axios = axios.create({
   baseURL: "http://rap2api.taobao.org/app/mock/19157/",
@@ -8,11 +10,24 @@ const Axios = axios.create({
   responseType: "json",
   timeout: 10000,
   retry: 3,
-  retryDelay: 1000
+  retryDelay: 1000,
+  showLoading: true
 });
 
+Axios.interceptors.request.use(
+  config => {
+    if (config.showLoading) {
+      eventBus.$emit(GLOBAL_EVENT_LOADING, true);
+    }
+    return config;
+  },
+  error => {
+    eventBus.$emit(GLOBAL_EVENT_LOADING, false);
+  }
+);
 Axios.interceptors.response.use(
   response => {
+    eventBus.$emit(GLOBAL_EVENT_LOADING, false);
     if (response.data.stat !== 1) {
       return Promise.reject(response);
     }
@@ -26,6 +41,7 @@ Axios.interceptors.response.use(
     config.__retryCount = config.__retryCount || 0;
 
     if (config.__retryCount >= config.retry) {
+      eventBus.$emit(GLOBAL_EVENT_LOADING, false);
       return Promise.reject(error);
     }
 

@@ -11,5 +11,6 @@ declare module "axios/" {
     retry?: number;
     retryDelay?: number;
     __retryCount?: number;
+    showLoading?: boolean;
   }
 }

@@ -77,7 +77,7 @@
       </div>
     </div>
     <div class="other-login__type">
-      <h5>{{ codeMsg }}</h5>
+      <h5>{{ languageConversion(currentLanguage, "otherLoginType") }}</h5>
       <ul>
         <li>
           <a
@@ -189,7 +189,7 @@ export default class MiLogin extends Vue {
 
   // methods
   toggelFooterNav(index: number): void {
-    clearTimeout(countdownTimer)
+    clearTimeout(countdownTimer);
     this.account = null;
     this.password = null;
     this.errMsg = "";
@@ -197,7 +197,7 @@ export default class MiLogin extends Vue {
     this.initVerificationcCode();
   }
   initVerificationcCode() {
-    this.codeMsg = this.languageConversion(this.currentLanguage, 'codeMsg');
+    this.codeMsg = this.languageConversion(this.currentLanguage, "codeMsg");
     this.getCodeLock = false;
     this.verificationCode = null;
     this.verificationCodeTimes = 1;

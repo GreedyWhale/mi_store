@@ -24,7 +24,7 @@
       </CustomInput>
       <CustomInput
         :placeholder="loginConfig.passwordPlaceholder"
-        :type="isVisiblePassword ? 'text' : loginConfig.passwordInputType"
+        :type="visiblePassword ? 'text' : loginConfig.passwordInputType"
         @focus="hideErrMsg"
         v-model="password"
       >
@@ -34,14 +34,14 @@
               :class="[getCodeLock ? 'disable' : '', 'input-suffix__text']"
               @click="getVerificationCode"
             >
-              {{ languageConversion(currentLanguage, "codeMsg") }}
+              {{ codeMsg }}
             </p>
           </template>
           <template v-else>
             <div
               :class="[
                 'input-suffix__btn',
-                isVisiblePassword ? 'input-suffix__btn-active' : ''
+                visiblePassword ? 'input-suffix__btn-active' : ''
               ]"
               @click="toggelPasswordInputType"
             >
@@ -77,7 +77,7 @@
       </div>
     </div>
     <div class="other-login__type">
-      <h5>{{ languageConversion(currentLanguage, "otherLoginType") }}</h5>
+      <h5>{{ codeMsg }}</h5>
       <ul>
         <li>
           <a
@@ -145,6 +145,7 @@ import { CHANGE_LOGININ_STATUS } from "@/constant";
 import { Mutation, State } from "vuex-class";
 import pageContent from "./page_content";
 
+let countdownTimer: any;
 @Component({
   components: {
     CustomInput
@@ -176,22 +177,30 @@ export default class MiLogin extends Vue {
   ];
   footerNavActiveIndex: number = 0;
   getCodeLock: boolean = false;
-  countdownTimer: any;
-  codeMsg: string = "";
+  codeMsg: string = "短信验证码";
   verificationCodeTimes: number = 1;
   account: any = null;
   password: any = null;
   verificationCode: any = null;
   errMsg: string = "";
-  isVisiblePassword: boolean = false;
-
+  visiblePassword: boolean = false;
   // mutations
   @Mutation(CHANGE_LOGININ_STATUS) changeLoginStatus!: () => void;
 
   // methods
   toggelFooterNav(index: number): void {
+    clearTimeout(countdownTimer)
+    this.account = null;
+    this.password = null;
     this.errMsg = "";
     this.footerNavActiveIndex = index;
+    this.initVerificationcCode();
+  }
+  initVerificationcCode() {
+    this.codeMsg = this.languageConversion(this.currentLanguage, 'codeMsg');
+    this.getCodeLock = false;
+    this.verificationCode = null;
+    this.verificationCodeTimes = 1;
   }
   toggleLoginType(): void {
     this.password = null;
@@ -199,7 +208,7 @@ export default class MiLogin extends Vue {
     this.isSmSLogin = !this.isSmSLogin;
   }
   toggelPasswordInputType(): void {
-    this.isVisiblePassword = !this.isVisiblePassword;
+    this.visiblePassword = !this.visiblePassword;
   }
   countdown(time: number): void {
     if (!time) {
@@ -215,14 +224,14 @@ export default class MiLogin extends Vue {
       this.currentLanguage,
       "codeMsgRetry"
     )}(${time})`;
-    this.countdownTimer = setTimeout(() => {
+    countdownTimer = setTimeout(() => {
       this.countdown(time);
     }, 1000);
   }
   startCountdown(): void {
     let time: number = 60 * this.verificationCodeTimes;
     this.verificationCodeTimes += 1;
-    this.countdownTimer = setTimeout(() => {
+    countdownTimer = setTimeout(() => {
       this.countdown(time);
     }, 1000);
   }
@@ -335,7 +344,6 @@ export default class MiLogin extends Vue {
     }
   }
   languageConversion(languageType: string, textKey: string): string {
-    console.log(textKey);
     return this.pageText[languageType][textKey];
   }
   // computed
@@ -381,7 +389,7 @@ export default class MiLogin extends Vue {
     return this.footNav[this.footerNavActiveIndex].language;
   }
   destroyed(): void {
-    clearTimeout(this.countdownTimer);
+    clearTimeout(countdownTimer);
   }
 }
 </script>

@@ -142,8 +142,9 @@ import { Component, Vue } from "vue-property-decorator";
 import CustomInput from "@/components/CustomInput.vue";
 import md5 from "blueimp-md5";
 import { CHANGE_LOGININ_STATUS } from "@/constant";
-import { Mutation, State } from "vuex-class";
+import { Mutation } from "vuex-class";
 import pageContent from "./page_content";
+import api from "@/api";
 
 let countdownTimer: any;
 @Component({
@@ -294,7 +295,7 @@ export default class MiLogin extends Vue {
     if (!this.getCodeLock && this.checkPhoneNumber()) {
       this.getCodeLock = true;
       this.$ajax
-        .post("api/getCode", {
+        .post(api.getCode, {
           phone: this.account
         })
         .then(res => {
@@ -327,7 +328,7 @@ export default class MiLogin extends Vue {
   login(): void {
     if (this.canLogin()) {
       this.$ajax
-        .post("api/login", {
+        .post(api.login, {
           account: this.account,
           password: md5(this.password)
         })

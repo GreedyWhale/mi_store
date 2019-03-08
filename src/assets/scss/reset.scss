@@ -2,7 +2,11 @@
   // 去除移动端点击阴影
   -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
 }
-h1, h2, h3, h4, h5, p{
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, p, ul{
   margin: 0;
 }
 ol, ul {

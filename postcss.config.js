@@ -17,9 +17,10 @@ module.exports = {
       mediaQuery: false // (Boolean) Allow px to be converted in media queries.
     },
     cssnano: {
-      preset: "advanced",
-      autoprefixer: false,
-      "postcss-zindex": false
+      "cssnano-preset-advanced": {
+        zindex: false,
+        autoprefixer: false
+      }
     }
   }
 };

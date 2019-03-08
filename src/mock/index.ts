@@ -1,11 +1,13 @@
 import { login, getCode } from "./login";
+import { homeNavList } from "./home";
 
 interface Mock {
-  [key: string]: any
+  [key: string]: any;
 }
 
 const mock: Mock = {
   login,
-  getCode
-}
-export default mock
+  getCode,
+  homeNavList
+};
+export default mock;

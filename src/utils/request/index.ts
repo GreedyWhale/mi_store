@@ -2,28 +2,32 @@ import axios from "axios";
 import eventBus from "@/eventBus";
 import { GLOBAL_EVENT_LOADING } from "@/constant";
 import mock from "@/mock";
+import qs from "qs";
 
-function getApiFromUrl (url: string): string {
-  const urlList: string[] =  url.split('/');
+function getApiFromUrl(url: string): string {
+  const urlList: string[] = url.split("/");
   return urlList[urlList.length - 1];
 }
 
 const Axios = axios.create({
-  baseURL: "http://rap2api.taobao.org/app/mock/19157/api/",
+  baseURL: "http://yapi.demo.qunar.com/mock/54066/",
   headers: {
-    "Content-Type": "application/json;charset=UTF-8"
+    "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
   },
   responseType: "json",
   timeout: 10000,
   retry: 3,
   retryDelay: 1000,
-  showLoading: true,
+  showLoading: true
 });
 
 Axios.interceptors.request.use(
   config => {
     if (config.showLoading) {
       eventBus.$emit(GLOBAL_EVENT_LOADING, true);
+    }
+    if (config.method === "post") {
+      config.data = qs.stringify(config.data);
     }
     return config;
   },
@@ -33,23 +37,23 @@ Axios.interceptors.request.use(
 );
 Axios.interceptors.response.use(
   response => {
-    const api = getApiFromUrl((<string>response.config.url));
+    const api = getApiFromUrl(<string>response.config.url);
     eventBus.$emit(GLOBAL_EVENT_LOADING, false);
     if (response.data.stat !== 1) {
-      return Promise.resolve(mock[(<string>api)]);
+      return Promise.resolve(mock[<string>api]);
     }
     return response;
   },
   error => {
     const config = error.config;
-    const api = getApiFromUrl((<string>error.config.url));
-    if (!config || !config.retry) return Promise.resolve(mock[(<string>api)]);
+    const api = getApiFromUrl(<string>error.config.url);
+    if (!config || !config.retry) return Promise.resolve(mock[<string>api]);
 
     config.__retryCount = config.__retryCount || 0;
 
     if (config.__retryCount >= config.retry) {
       eventBus.$emit(GLOBAL_EVENT_LOADING, false);
-      return Promise.resolve(mock[(<string>api)]);
+      return Promise.resolve(mock[<string>api]);
     }
 
     config.__retryCount += 1;
